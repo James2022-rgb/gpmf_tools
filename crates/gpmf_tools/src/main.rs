@@ -41,8 +41,7 @@ struct ExtractGpxArgs {
 }
 
 fn main() -> Result<(), String>  {
-    let cli = Cli::try_parse()
-        .map_err(|e| format!("Failed to parse command line arguments: {}", e))?;
+    let cli = Cli::parse();
 
     logging::LoggingConfig::default()
         .level(if cli.verbose {
