@@ -27,7 +27,7 @@ Extracts the GPS stream (`gpmd`) from a GoPro MP4 file and exports it as a GPX f
 - If `--output` is not provided, the program writes to stdout only if `--stdout` is explicitly set.
 
 ### The help `-h, --help` option
-The output of `uhdr2avif help` is quoted verbatim here:
+The output of `gpmf_tools help` is quoted verbatim here:
 ```bash
 Usage: gpmf_tools.exe [OPTIONS] <COMMAND>
 
