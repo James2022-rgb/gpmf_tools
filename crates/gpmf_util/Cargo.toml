@@ -1,0 +1,20 @@
+[package]
+name = "gpmf_util"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+default = ["gpx", "mp4"]
+gpx = ["dep:gpx", "dep:geo-types"]
+mp4 = ["dep:mp4"]
+
+[dependencies]
+mp4 = { git = "https://github.com/James2022-rgb/mp4-rust", optional = true } # Use a forked version of `mp4-rust` that supports GPMF (in addition to Cxyz and hvc1).
+# Use the following line if you want to use a local version of `mp4-rust` instead of the git version.
+# mp4 = { path = "../../../mp4-rust", optional = true }
+
+gpx = { git = "https://github.com/georust/gpx", rev = "838c904d05725545f166cfedf42a4489fd79878a", optional = true }
+geo-types =  { version = "0.7.8", optional = true } # Same version as the one used in the `gpx` crate.
+time = { version = "0.3", features = ["formatting", "parsing"] } # Same version specification as the one used in the `gpx` crate.
+
+gpmf_parser = { path = "../gpmf_parser" }

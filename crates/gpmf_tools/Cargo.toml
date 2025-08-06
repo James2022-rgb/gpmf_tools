@@ -1,0 +1,21 @@
+[package]
+name = "gpmf_tools"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+default = ["gpx", "mp4"]
+gpx = ["gpmf_util/gpx"]
+mp4 = ["gpmf_util/mp4", "dep:mp4"]
+
+[dependencies]
+log = "0.4"
+fern = { version = "0.7", features = ["colored"] }
+chrono = "0.4.41"
+clap = { version = "4.5.38", features = ["derive"] }
+
+mp4 = { git = "https://github.com/James2022-rgb/mp4-rust", optional = true } # Use a forked version of `mp4-rust` that supports GPMF (in addition to Cxyz and hvc1).
+# Use the following line if you want to use a local version of `mp4-rust` instead of the git version.
+# mp4 = { path = "../../../mp4-rust", optional = true }
+
+gpmf_util = { path = "../gpmf_util", default-features = false }

@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "crates/gpmf_parser",
+    "crates/gpmf_util",
+    "crates/gpmf_tools",
+]
