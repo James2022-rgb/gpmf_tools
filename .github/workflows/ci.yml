@@ -1,0 +1,60 @@
+name: Release Multi-Target
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+            ext: .exe
+          - target: aarch64-apple-darwin
+            os: macos-latest
+            ext: ""
+          - target: x86_64-apple-darwin
+            os: macos-latest
+            ext: ""
+
+    name: Build for ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Build binary
+        run: cargo build --release -p gpmf_tools --target ${{ matrix.target }}
+
+      - name: Rename and prepare binary
+        run: |
+          mkdir -p dist
+          mkdir -p dist/${{ matrix.target }}
+          cp target/${{ matrix.target }}/release/gpmf_tools${{ matrix.ext }} dist/${{ matrix.target }}/gpmf_tools${{ matrix.ext }}
+          
+      - name: Zip binary (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          cd dist
+          Compress-Archive -Path ${{ matrix.target }}/gpmf_tools${{ matrix.ext }} -DestinationPath gpmf_tools-${{ matrix.target }}.zip
+
+      - name: Zip binary (Windows)
+        if: runner.os != 'Windows'
+        run: |
+          cd dist
+          zip -j gpmf_tools-${{ matrix.target }}.zip ${{ matrix.target }}/gpmf_tools${{ matrix.ext }}
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/gpmf_tools-${{ matrix.target }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.gpmf_tools_RELEASE }}
