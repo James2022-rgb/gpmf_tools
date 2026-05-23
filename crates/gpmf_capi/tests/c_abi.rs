@@ -1,6 +1,11 @@
 //! Exercises the `extern "C"` entry points through raw pointer arguments,
 //! the same way a C caller would. Uses the bundled GPMF sample binary from
 //! `gpmf_parser`.
+//!
+//! Gated behind the `with-fixtures` feature because the referenced
+//! `test_files/sample_60.bin` is intentionally not tracked in git.
+
+#![cfg(feature = "with-fixtures")]
 
 use std::ptr;
 

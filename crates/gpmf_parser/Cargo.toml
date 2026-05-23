@@ -8,6 +8,9 @@ edition = "2024"
 [features]
 default = ["time"]
 time = ["dep:time"]
+# Enables tests that read uncommitted binary fixtures under test_files/.
+# Off by default so `cargo test` succeeds on a fresh clone.
+with-fixtures = []
 
 [dependencies]
 thiserror = "1.0"

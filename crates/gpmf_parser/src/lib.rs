@@ -324,7 +324,7 @@ fn extract_quat(child_klvs: &[Klv], fourcc: &str) -> Option<Vec<Quat>> {
     Some(tuples.into_iter().map(|t| Quat { w: t[0], x: t[1], y: t[2], z: t[3] }).collect())
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "with-fixtures"))]
 mod tests {
     use super::*;
     use std::io::Cursor;

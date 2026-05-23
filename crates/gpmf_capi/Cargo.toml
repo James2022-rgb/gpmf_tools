@@ -7,6 +7,12 @@ edition = "2024"
 name = "jgpmf_capi"
 crate-type = ["staticlib", "rlib"]
 
+[features]
+# Enables the C-ABI integration test that reads an uncommitted binary
+# fixture from `crates/gpmf_parser/test_files/`. Off by default so
+# `cargo test` succeeds on a fresh clone.
+with-fixtures = []
+
 [dependencies]
 gpmf_parser = { path = "../gpmf_parser", default-features = false }
 
