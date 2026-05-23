@@ -1,7 +1,9 @@
 [workspace]
+resolver = "3"
 
 members = [
     "crates/gpmf_parser",
     "crates/gpmf_util",
     "crates/gpmf_tools",
+    "crates/gpmf_capi",
 ]

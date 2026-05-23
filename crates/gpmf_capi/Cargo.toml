@@ -1,0 +1,14 @@
+[package]
+name = "gpmf_capi"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "jgpmf_capi"
+crate-type = ["staticlib", "rlib"]
+
+[dependencies]
+gpmf_parser = { path = "../gpmf_parser", default-features = false }
+
+[build-dependencies]
+cbindgen = "0.29"
